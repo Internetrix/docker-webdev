@@ -52,7 +52,7 @@ RUN a2ensite \
     001-wildcard-php70-vhost.conf \
     002-wildcard-php56-vhost.conf \
     003-wildcard-tmpfs-php70-vhost.conf \
-    111-wildcard-default.conf \
+    111-wildcard-default.conf
 
 # Setup Webgrind - web based front-end xdebug profile information presentation tool
 ADD config/apache/conf/apache-phpwebgrind.conf /etc/apache2/conf-available/phpwebgrind.conf
