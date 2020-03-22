@@ -1,4 +1,4 @@
-FROM internetrix/webdev:lap
+FROM internetrix/webdev:legacy-lap
 MAINTAINER Jason Zhang <jason.zhang@internetrix.com.au>
 ARG DEBIAN_FRONTEND=noninteractive
 
