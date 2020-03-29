@@ -10,7 +10,11 @@ if [ ! -d /media/www ] || [ "$(ls -A /media/www 2> /dev/null)" == "" ]; then
 
 	# On some computers mount with no vers flag will break while on some computers if there is a vers flag, it will also break
 	# Give user choice to define whether they want to use the ver flag
-    if [ "$WEBDEV_CIFS_SMB_VERSION" == 3.0 ]; then
+    if [ "$WEBDEV_CIFS_SMB_VERSION" == 3.1 ]; then
+	    echo "$WEBDEV_CIFS_HOST_FOLDER  /media/www  cifs  vers=$WEBDEV_CIFS_SMB_VERSION,uid=www-data,gid=www-data,file_mode=0777,dir_mode=0777,username=$WEBDEV_CIFS_USER,password=$WEBDEV_CIFS_PW,iocharset=utf8  0  0" > /etc/fstab
+    elif [ "$WEBDEV_CIFS_SMB_VERSION" == 3.0 ]; then
+	    echo "$WEBDEV_CIFS_HOST_FOLDER  /media/www  cifs  vers=$WEBDEV_CIFS_SMB_VERSION,uid=www-data,gid=www-data,file_mode=0777,dir_mode=0777,username=$WEBDEV_CIFS_USER,password=$WEBDEV_CIFS_PW,iocharset=utf8  0  0" > /etc/fstab
+    elif [ "$WEBDEV_CIFS_SMB_VERSION" == 2.0 ]; then
 	    echo "$WEBDEV_CIFS_HOST_FOLDER  /media/www  cifs  vers=$WEBDEV_CIFS_SMB_VERSION,uid=www-data,gid=www-data,file_mode=0777,dir_mode=0777,username=$WEBDEV_CIFS_USER,password=$WEBDEV_CIFS_PW,iocharset=utf8  0  0" > /etc/fstab
     else
     	echo "$WEBDEV_CIFS_HOST_FOLDER  /media/www  cifs  uid=www-data,gid=www-data,file_mode=0777,dir_mode=0777,username=$WEBDEV_CIFS_USER,password=$WEBDEV_CIFS_PW,iocharset=utf8  0  0" > /etc/fstab
@@ -82,7 +86,7 @@ fi
 # Update PHP xdebug.remote_host IP
 if [ "$WEBDEV_REMOTE_HOST_IP" != "" ]; then
 	sed -i -e "s~xdebug.remote_host=[0-9.a-zA-Z]*~xdebug.remote_host=$WEBDEV_REMOTE_HOST_IP~g" /etc/php/5.6/fpm/php.ini
-	sed -i -e "s~xdebug.remote_host=[0-9.a-zA-Z]*~xdebug.remote_host=$WEBDEV_REMOTE_HOST_IP~g" /etc/php/7.0/fpm/php.ini 
+	sed -i -e "s~xdebug.remote_host=[0-9.a-zA-Z]*~xdebug.remote_host=$WEBDEV_REMOTE_HOST_IP~g" /etc/php/7.0/fpm/php.ini
 fi
 
 # Only start PHP 5.6 FPM if WEBDEV_ENABLE_PHP_70_FPM is 1
